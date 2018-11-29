@@ -17,7 +17,11 @@
  */
 package com.graphhopper.routing;
 
-import com.graphhopper.routing.util.FlagEncoder;
+import com.graphhopper.routing.profiles.BooleanEncodedValue;
+import com.graphhopper.routing.profiles.DecimalEncodedValue;
+import com.graphhopper.routing.profiles.IntEncodedValue;
+import com.graphhopper.routing.profiles.StringEncodedValue;
+import com.graphhopper.storage.IntsRef;
 import com.graphhopper.util.CHEdgeIteratorState;
 import com.graphhopper.util.EdgeIterator;
 import com.graphhopper.util.EdgeIteratorState;
@@ -100,13 +104,101 @@ class VirtualEdgeIterator implements EdgeIterator, CHEdgeIteratorState {
     }
 
     @Override
-    public long getFlags() {
+    public IntsRef getFlags() {
         return edges.get(current).getFlags();
     }
 
     @Override
-    public EdgeIteratorState setFlags(long flags) {
+    public EdgeIteratorState setFlags(IntsRef flags) {
         return edges.get(current).setFlags(flags);
+    }
+
+    @Override
+    public EdgeIteratorState set(BooleanEncodedValue property, boolean value) {
+        edges.get(current).set(property, value);
+        return this;
+    }
+
+    @Override
+    public boolean get(BooleanEncodedValue property) {
+        return edges.get(current).get(property);
+    }
+
+    @Override
+    public EdgeIteratorState setReverse(BooleanEncodedValue property, boolean value) {
+        edges.get(current).setReverse(property, value);
+        return this;
+    }
+
+    @Override
+    public boolean getReverse(BooleanEncodedValue property) {
+        return edges.get(current).getReverse(property);
+    }
+
+    @Override
+    public EdgeIteratorState set(IntEncodedValue property, int value) {
+        edges.get(current).set(property, value);
+        return this;
+    }
+
+    @Override
+    public int get(IntEncodedValue property) {
+        return edges.get(current).get(property);
+    }
+
+    @Override
+    public EdgeIteratorState setReverse(IntEncodedValue property, int value) {
+        edges.get(current).setReverse(property, value);
+        return this;
+    }
+
+    @Override
+    public int getReverse(IntEncodedValue property) {
+        return edges.get(current).getReverse(property);
+    }
+
+    @Override
+    public EdgeIteratorState set(DecimalEncodedValue property, double value) {
+        edges.get(current).set(property, value);
+        return this;
+    }
+
+    @Override
+    public double get(DecimalEncodedValue property) {
+        return edges.get(current).get(property);
+    }
+
+    @Override
+    public EdgeIteratorState setReverse(DecimalEncodedValue property, double value) {
+        edges.get(current).setReverse(property, value);
+        return this;
+    }
+
+    @Override
+    public double getReverse(DecimalEncodedValue property) {
+        return edges.get(current).getReverse(property);
+    }
+
+    @Override
+    public EdgeIteratorState set(StringEncodedValue property, String value) {
+        edges.get(current).set(property, value);
+        return this;
+    }
+
+    @Override
+    public String get(StringEncodedValue property) {
+        return edges.get(current).get(property);
+    }
+
+    @Override
+    public EdgeIteratorState setReverse(StringEncodedValue property, String value) {
+        edges.get(current).setReverse(property, value);
+        return this;
+    }
+
+    @Override
+    public String getReverse(StringEncodedValue property) {
+        return edges.get(current).getReverse(property);
     }
 
     @Override
@@ -117,11 +209,6 @@ class VirtualEdgeIterator implements EdgeIterator, CHEdgeIteratorState {
     @Override
     public EdgeIteratorState setName(String name) {
         return edges.get(current).setName(name);
-    }
-
-    @Override
-    public boolean getBool(int key, boolean _default) {
-        return edges.get(current).getBool(key, _default);
     }
 
     @Override
@@ -140,18 +227,8 @@ class VirtualEdgeIterator implements EdgeIterator, CHEdgeIteratorState {
     }
 
     @Override
-    public EdgeIteratorState copyPropertiesTo(EdgeIteratorState edge) {
-        return edges.get(current).copyPropertiesTo(edge);
-    }
-
-    @Override
-    public boolean isBackward(FlagEncoder encoder) {
-        return edges.get(current).isBackward(encoder);
-    }
-
-    @Override
-    public boolean isForward(FlagEncoder encoder) {
-        return edges.get(current).isForward(encoder);
+    public EdgeIteratorState copyPropertiesFrom(EdgeIteratorState edge) {
+        return edges.get(current).copyPropertiesFrom(edge);
     }
 
     @Override
