@@ -17,6 +17,7 @@
  */
 package com.graphhopper.routing.util;
 
+import com.graphhopper.reader.OSMTurnRelation;
 import com.graphhopper.routing.profiles.BooleanEncodedValue;
 import com.graphhopper.routing.profiles.DecimalEncodedValue;
 import com.graphhopper.routing.profiles.EncodedValueLookup;
@@ -30,7 +31,7 @@ import com.graphhopper.util.Translation;
  *
  * @author Peter Karich
  */
-public interface FlagEncoder extends TurnCostEncoder, EncodedValueLookup {
+public interface FlagEncoder extends EncodedValueLookup {
 
     /**
      * @return the version of this FlagEncoder to enforce none-compatibility when new attributes are
